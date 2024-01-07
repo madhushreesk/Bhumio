@@ -14,7 +14,7 @@ import DataTable from "src/sections/DataTable/DataTable";
 
 export default function SearchPage() {
   const [searchData, setSearchData] = useState([]);
-  console.log("parent search data", searchData.row);
+  console.log("parent search data", searchData);
 
   const updateSearchData = (data) => {
     setSearchData(data);
@@ -29,7 +29,7 @@ export default function SearchPage() {
       <Container>
         <Searchbar updateSearchData={updateSearchData} />
 
-        <DataTable searchData={searchData.row} />
+        <DataTable searchData={searchData} page={"search"} />
       </Container>
     </>
   );

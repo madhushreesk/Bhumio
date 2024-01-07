@@ -53,7 +53,7 @@ export default function Searchbar({ updateSearchData }) {
   const handleSearch = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/dashboard/search?search=${searchQuery}`,
+        `http://localhost:4000/dashboard/search?search=${searchQuery}`,
         {
           method: "GET",
           headers: {},
@@ -65,8 +65,6 @@ export default function Searchbar({ updateSearchData }) {
         setSearchData(res);
         console.log("Child Search result", res);
         updateSearchData(res);
-      } else {
-        console.error("Failed to Search");
       }
     } catch (error) {
       console.error("Error occurred while making the API call:", error);

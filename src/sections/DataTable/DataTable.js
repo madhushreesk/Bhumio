@@ -59,7 +59,7 @@ function createData(
 }
 
 function Row(props) {
-  const { row } = props;
+  const { row, page } = props;
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -74,9 +74,11 @@ function Row(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
           <Link to="/dashboard/editPatient_form" state={row}>
-            <IconButton aria-label="expand row" size="small" title="Edit">
-              <EditIcon fontSize="small" />
-            </IconButton>
+            {page === "edit" && (
+              <IconButton aria-label="expand row" size="small" title="Edit">
+                <EditIcon fontSize="small" />
+              </IconButton>
+            )}
           </Link>
         </TableCell>
         <TableCell>{row.PatientID}</TableCell>
@@ -187,79 +189,9 @@ const rows = [
   ),
 ];
 
-export default function DataTable({ searchQuery }) {
-  const filteredPatients = rows.filter((patient) => {
-    const {
-      First_Name,
-      Last_Name,
-      Location,
-      Age,
-      Phone,
-      Gender,
-      Address,
-      Prescription,
-      Dose,
-      Physician_first_name,
-      Physician_last_name,
-      PhysicianNumber,
-      Bill,
-      Next_Visit,
-      PhysicianID,
-      PatientID,
-      Visit_Date,
-    } = patient;
-    const lowerCaseQuery = String(searchQuery).toLowerCase();
-
-    return (
-      String(First_Name).toLowerCase().includes(lowerCaseQuery) ||
-      String(Last_Name).toLowerCase().includes(lowerCaseQuery) ||
-      String(Location).toLowerCase().includes(lowerCaseQuery) ||
-      String(Age).toLowerCase().includes(lowerCaseQuery) ||
-      String(Phone).toLowerCase().includes(lowerCaseQuery) ||
-      String(Gender).toLowerCase().includes(lowerCaseQuery) ||
-      String(Address).toLowerCase().includes(lowerCaseQuery) ||
-      String(Prescription).toLowerCase().includes(lowerCaseQuery) ||
-      String(Dose).toLowerCase().includes(lowerCaseQuery) ||
-      String(Physician_first_name).toLowerCase().includes(lowerCaseQuery) ||
-      String(Physician_last_name).toLowerCase().includes(lowerCaseQuery) ||
-      String(PhysicianNumber).toLowerCase().includes(lowerCaseQuery) ||
-      String(Bill).toLowerCase().includes(lowerCaseQuery) ||
-      String(Next_Visit).toLowerCase().includes(lowerCaseQuery) ||
-      String(PhysicianID).toLowerCase().includes(lowerCaseQuery) ||
-      String(PatientID).toLowerCase().includes(lowerCaseQuery) ||
-      String(Visit_Date).toLowerCase().includes(lowerCaseQuery)
-    );
-  });
-
-  const [patientData, setPatientData] = React.useState([]);
-
-  const getApiData = async () => {
-    try {
-      const response = await fetch(
-        "http://localhost:8080/dashboard/getAllDetails",
-        {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-          },
-        }
-      );
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-        setPatientData(data);
-      } else {
-        console.error("Failed to retrieve patient details");
-      }
-    } catch (error) {
-      console.error("Error occurred while making the API call:", error);
-    }
-  };
-
-  React.useEffect(() => {
-    getApiData();
-  }, []);
+export default function DataTable({ searchData, page }) {
+  console.log(page, "page");
+  console.log(searchData, "prop data");
 
   return (
     <TableContainer component={Paper}>
@@ -277,8 +209,8 @@ export default function DataTable({ searchQuery }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {patientData?.data?.map((row) => (
-            <Row key={row.id} row={row} />
+          {searchData?.data?.map((row) => (
+            <Row key={row.id} row={row} page={page} />
           ))}
         </TableBody>
       </Table>
