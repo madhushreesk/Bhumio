@@ -43,6 +43,7 @@ export default function Searchbar({ updateSearchData }) {
   const [open, setOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchData, setSearchData] = useState([]);
+  console.log(searchData);
 
   const handleClose = () => {
     setOpen(false);
