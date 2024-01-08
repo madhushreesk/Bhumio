@@ -1,21 +1,22 @@
 /* eslint-disable camelcase */
 import { Helmet } from "react-helmet-async";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import * as React from "react";
 
 // @mui
-import { Stack, Container, Typography, TextField } from "@mui/material";
+import { Stack, Container, Typography } from "@mui/material";
+import Searchbar from "src/layouts/dashboard/header/Searchbar";
 
 import DataTable from "../sections/DataTable/DataTable";
 
 export default function EditPage() {
   // const [open, setOpen] = useState(null);
   const [patientData, setPatientData] = React.useState([]);
-
-  const [searchQuery, setSearchQuery] = useState("");
-  const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value);
+  const updateSearchData = (data) => {
+    setSearchData(data);
   };
+  const [searchData, setSearchData] = useState([]);
+  console.log("parent search data", searchData);
 
   const getApiData = async () => {
     try {
@@ -59,13 +60,9 @@ export default function EditPage() {
             Edit Patients
           </Typography>
         </Stack>
-        <TextField
-          label="Search Patients"
-          variant="outlined"
-          value={searchQuery}
-          onChange={handleSearchChange}
-          style={{ marginBottom: "16px" }}
-        />
+
+        <Searchbar updateSearchData={updateSearchData} />
+
         <DataTable searchData={patientData} page={"edit"} />
       </Container>
     </>

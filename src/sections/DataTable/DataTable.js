@@ -18,46 +18,6 @@ import EditIcon from "@mui/icons-material/Edit";
 
 import { Link } from "react-router-dom";
 
-function createData(
-  First_Name,
-  Last_Name,
-  Location,
-  Age,
-  Phone,
-  Gender,
-  Address,
-  Prescription,
-  Dose,
-  Physician_first_name,
-  Physician_last_name,
-  PhysicianNumber,
-  Bill,
-  Next_Visit,
-  PhysicianID,
-  PatientID,
-  Visit_Date
-) {
-  return {
-    First_Name,
-    Last_Name,
-    Location,
-    Age,
-    Phone,
-    Gender,
-    Address,
-    Prescription,
-    Dose,
-    Physician_first_name,
-    Physician_last_name,
-    PhysicianNumber,
-    Bill,
-    Next_Visit,
-    PhysicianID,
-    PatientID,
-    Visit_Date,
-  };
-}
-
 function Row(props) {
   const { row, page } = props;
   const [open, setOpen] = React.useState(false);
@@ -148,72 +108,30 @@ Row.propTypes = {
   }).isRequired,
 };
 
-const rows = [
-  createData(
-    "first_name",
-    "last_name",
-    "Location",
-    "Age",
-    "Phone",
-    "Gender",
-    "Address",
-    "Prescription",
-    "Dose",
-    "Physician_first_name",
-    "Physician_last_name",
-    "Physician Number",
-    "Bill",
-    "Next Visit",
-    "Physician -ID",
-    "Patient- ID",
-    "Visit Date"
-  ),
-  createData(
-    "first_name",
-    "last_name",
-    "Location",
-    "Age",
-    "Phone",
-    "Gender",
-    "Address",
-    "Prescription",
-    "Dose",
-    "Physician_first_name",
-    "Physician_last_name",
-    "7894561230",
-    "Bill",
-    "Next Visit",
-    "Physician -ID",
-    "Patient- ID",
-    "Visit Date"
-  ),
-];
-
 export default function DataTable({ searchData, page }) {
-  console.log(page, "page");
-  console.log(searchData, "prop data");
-
   return (
     <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Actions</TableCell>
-            <TableCell>Patient Id</TableCell>
-            <TableCell>Patient name</TableCell>
-            <TableCell>Location</TableCell>
-            <TableCell>Age</TableCell>
-            <TableCell>Phone</TableCell>
-            <TableCell>Gender</TableCell>
-            <TableCell>Address</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {searchData?.data?.map((row) => (
-            <Row key={row.id} row={row} page={page} />
-          ))}
-        </TableBody>
-      </Table>
+      {searchData?.data && (
+        <Table aria-label="collapsible table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Actions</TableCell>
+              <TableCell>Patient Id</TableCell>
+              <TableCell>Patient name</TableCell>
+              <TableCell>Location</TableCell>
+              <TableCell>Age</TableCell>
+              <TableCell>Phone</TableCell>
+              <TableCell>Gender</TableCell>
+              <TableCell>Address</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {searchData.data.map((row) => (
+              <Row key={row.id} row={row} page={page} />
+            ))}
+          </TableBody>
+        </Table>
+      )}
     </TableContainer>
   );
 }

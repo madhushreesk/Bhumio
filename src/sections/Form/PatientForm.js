@@ -70,7 +70,6 @@ export default function PatientForm() {
   const [errors, setErrors] = useState({});
 
   const handleNext = () => {
-    // Validate the fields before proceeding to the next step
     if (validateFields()) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
@@ -84,7 +83,6 @@ export default function PatientForm() {
   const handleInputChange = (event, fieldName) => {
     const { value } = event.target;
 
-    // Check if the field name is 'field1' and the value contains only numbers
     if (
       fieldName === "Age" ||
       fieldName === "Phone" ||
@@ -136,7 +134,7 @@ export default function PatientForm() {
     setOpen(true);
     setIsButtonDisabled(true);
     const fieldMapping = {
-      "Patient Name (First, Last Name)": ["first_name", "last_name"],
+      "Patient Name (First, Last Name)": ["First_Name", "Last_Name"],
       "Physician Name (First, Last Name)": [
         "Physician_first_name",
         "Physician_last_name",
@@ -165,8 +163,9 @@ export default function PatientForm() {
 
     // Now, make the API call
     try {
+      console.log("try 1");
       const response = await fetch(
-        "http://localhost:8080/dashboard/addPatients",
+        "http://localhost:4000/dashboard/addPatients",
         {
           method: "POST",
           headers: {
@@ -175,7 +174,7 @@ export default function PatientForm() {
           body: JSON.stringify(renamedFormData),
         }
       );
-
+      console.log("try 2");
       if (response.ok) {
         console.log("Patient details added successfully!");
       } else {

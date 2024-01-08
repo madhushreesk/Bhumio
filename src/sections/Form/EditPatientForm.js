@@ -174,7 +174,7 @@ export default function EditPatientForm() {
 
     try {
       const response = await fetch(
-        "http://localhost:8080/dashboard/editPatient_form",
+        "http://localhost:4000/dashboard/editPatient",
         {
           method: "POST",
           headers: {
@@ -185,7 +185,7 @@ export default function EditPatientForm() {
       );
 
       if (response.ok) {
-        console.log("Patient details added successfully!");
+        console.log("Patient details edited successfully!");
       } else {
         console.error("Failed to add patient details");
       }

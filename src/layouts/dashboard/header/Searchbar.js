@@ -13,8 +13,6 @@ import {
 import { bgBlur } from "../../../utils/cssStyles";
 // component
 import Iconify from "../../../components/iconify";
-import DataTable from "src/sections/DataTable/DataTable";
-import SearchPage from "src/pages/SearchPage";
 
 // ----------------------------------------------------------------------
 
@@ -52,6 +50,11 @@ export default function Searchbar({ updateSearchData }) {
 
   const handleSearch = async () => {
     try {
+      if (searchQuery.trim() === "") {
+        setSearchData([]);
+        updateSearchData([]);
+        return;
+      }
       const response = await fetch(
         `http://localhost:4000/dashboard/search?search=${searchQuery}`,
         {
@@ -63,7 +66,6 @@ export default function Searchbar({ updateSearchData }) {
       if (response.ok) {
         const res = await response.json();
         setSearchData(res);
-        console.log("Child Search result", res);
         updateSearchData(res);
       }
     } catch (error) {
@@ -100,6 +102,11 @@ export default function Searchbar({ updateSearchData }) {
               }
               sx={{ mr: 1, fontWeight: "fontWeightBold" }}
               onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSearch();
+                }
+              }}
             />
             <Button
               variant="contained"
