@@ -10,7 +10,6 @@ import Searchbar from "src/layouts/dashboard/header/Searchbar";
 import DataTable from "../sections/DataTable/DataTable";
 
 export default function EditPage() {
-  // const [open, setOpen] = useState(null);
   const [patientData, setPatientData] = React.useState([]);
   const updateSearchData = (data) => {
     setSearchData(data);
@@ -21,7 +20,7 @@ export default function EditPage() {
   const getApiData = async () => {
     try {
       const response = await fetch(
-        "http://localhost:4000/dashboard/getAllDetails",
+        "https://teal-fuzzy-mackerel.cyclic.app/dashboard/getAllDetails",
         {
           method: "GET",
           headers: {

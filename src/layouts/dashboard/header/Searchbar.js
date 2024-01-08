@@ -56,7 +56,7 @@ export default function Searchbar({ updateSearchData }) {
         return;
       }
       const response = await fetch(
-        `http://localhost:4000/dashboard/search?search=${searchQuery}`,
+        `https://teal-fuzzy-mackerel.cyclic.app/dashboard/search?search=${searchQuery}`,
         {
           method: "GET",
           headers: {},

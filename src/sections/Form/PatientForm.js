@@ -165,7 +165,7 @@ export default function PatientForm() {
     try {
       console.log("try 1");
       const response = await fetch(
-        "http://localhost:4000/dashboard/addPatients",
+        "https://teal-fuzzy-mackerel.cyclic.app/dashboard/addPatients",
         {
           method: "POST",
           headers: {

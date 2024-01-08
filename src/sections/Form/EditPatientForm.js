@@ -174,7 +174,7 @@ export default function EditPatientForm() {
 
     try {
       const response = await fetch(
-        "http://localhost:4000/dashboard/editPatient",
+        "https://teal-fuzzy-mackerel.cyclic.app./dashboard/editPatient",
         {
           method: "POST",
           headers: {
