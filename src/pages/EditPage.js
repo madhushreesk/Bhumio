@@ -61,7 +61,9 @@ export default function EditPage() {
         </Stack>
 
         <Searchbar updateSearchData={updateSearchData} />
-
+        {searchData && (
+          <DataTable searchData={searchData} page={"searchAndEdit"} />
+        )}
         <DataTable searchData={patientData} page={"edit"} />
       </Container>
     </>
