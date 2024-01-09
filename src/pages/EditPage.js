@@ -16,7 +16,7 @@ export default function EditPage() {
   };
   const [searchData, setSearchData] = useState([]);
   console.log("parent search data", searchData);
-  console.log("search data. length", searchData.length);
+  console.log("search data. length", searchData?.data?.length);
 
   const getApiData = async () => {
     try {
