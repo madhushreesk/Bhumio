@@ -16,6 +16,7 @@ export default function EditPage() {
   };
   const [searchData, setSearchData] = useState([]);
   console.log("parent search data", searchData);
+  console.log("search data. length", searchData.length);
 
   const getApiData = async () => {
     try {
@@ -61,11 +62,8 @@ export default function EditPage() {
         </Stack>
 
         <Searchbar updateSearchData={updateSearchData} />
-        {searchData ? (
-          <DataTable searchData={searchData} page={"searchAndEdit"} />
-        ) : (
-          <DataTable searchData={patientData} page={"edit"} />
-        )}
+
+        <DataTable searchData={patientData} page={"edit"} />
       </Container>
     </>
   );
